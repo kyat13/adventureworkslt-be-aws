@@ -20,12 +20,12 @@ public class CustomerService {
     public CustomerDto addCustomer(CustomerCreationDto customerDto) {
         Customer newCustomer = new Customer(
                 -1,
-                customerDto.getTitle(),
-                customerDto.getFirstName(),
-                customerDto.getMiddleName(),
-                customerDto.getLastName(),
-                customerDto.getSuffix(),
-                customerDto.getModifiedDate(),
+                customerDto.title(),
+                customerDto.firstName(),
+                customerDto.middleName(),
+                customerDto.lastName(),
+                customerDto.suffix(),
+                customerDto.modifiedDate(),
                 UUID.randomUUID(), PasswordHandler.generatePasswordHash(customerDto), "TkEK");
 
         return new CustomerDto(customerRepository.save(newCustomer));

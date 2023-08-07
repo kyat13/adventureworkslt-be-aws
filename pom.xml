@@ -33,6 +33,14 @@
 					<scope>runtime</scope>
 				</dependency>
 			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 		<profile>
 			<id>mssql</id>
@@ -46,16 +54,34 @@
 					<scope>runtime</scope>
 				</dependency>
 			</dependencies>
+			<build>
+						<plugins>
+							<plugin>
+								<groupId>org.springframework.boot</groupId>
+								<artifactId>spring-boot-maven-plugin</artifactId>
+							</plugin>
+						</plugins>
+					</build>
 		</profile>
 		<profile>
-		<id>shaded-jar</id>
-		<build>
+		<id>staging</id>
+			<properties>
+				<spring.profiles.active>staging</spring.profiles.active>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>com.microsoft.sqlserver</groupId>
+					<artifactId>mssql-jdbc</artifactId>
+					<scope>runtime</scope>
+				</dependency>
+			</dependencies>
+			<build>
 			<plugins>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-shade-plugin</artifactId>
 					<configuration>
-						<createDependencyReducedPom>false</createDependencyReducedPom>
+						<createDependencyReducedPom>true</createDependencyReducedPom>
 					</configuration>
 					<executions>
 						<execution>
@@ -119,35 +145,6 @@
 
 	</dependencies>
 
-	<build>
-		<plugins>
-<!--			<plugin>-->
-<!--				<groupId>org.springframework.boot</groupId>-->
-<!--				<artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--			</plugin>-->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<configuration>
-					<createDependencyReducedPom>false</createDependencyReducedPom>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<artifactSet>
-								<excludes>
-									<exclude>org.apache.tomcat.embed:*</exclude>
-								</excludes>
-							</artifactSet>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+
 
 </project>
