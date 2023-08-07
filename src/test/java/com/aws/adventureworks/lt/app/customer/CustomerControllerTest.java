@@ -27,17 +27,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = CustomerController.class)
-public class CustomerControllerTest {
+class CustomerControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
     private CustomerService customerService;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Test
-    public void GET_customers_shouldReturnPageOfCustomerDto() throws Exception {
+    void GET_customers_shouldReturnPageOfCustomerDto() throws Exception {
         // arrange
         Customer q1 = new Customer(1, "mr", "John", "M", "Travolta", "", "2005-08-01 00:00:00.000", UUID.randomUUID(), "h45h", "541T");
         Customer q2 = new Customer(2, "mr", "Jack", "T", "Sparrow", "Jr.", "2005-08-01 00:00:00.000", UUID.randomUUID(), "h45h", "541T");
@@ -57,7 +58,7 @@ public class CustomerControllerTest {
     }
 
     @Test
-    public void POST_customer_shouldReturnCustomerDto() throws Exception {
+    void POST_customer_shouldReturnCustomerDto() throws Exception {
         // arrange
         Customer customer1 = new Customer(1, "mr", "John", "M", "Travolta", "", "2005-08-01 00:00:00.000",  UUID.randomUUID(), "h45h", "TkEK");
         CustomerCreationDto customerDto = new CustomerCreationDto(customer1);

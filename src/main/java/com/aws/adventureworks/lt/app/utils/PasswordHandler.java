@@ -6,6 +6,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.security.SecureRandom;
 
 public class PasswordHandler {
+    private PasswordHandler(){
+        // not to be instantiated
+    }
     public static String generatePasswordHash(CustomerCreationDto customerCreationDto){
         int strength = 10; // work factor of bcrypt
         BCryptPasswordEncoder bCryptPasswordEncoder =

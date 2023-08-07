@@ -90,12 +90,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-<!--				<configuration>-->
-<!--					<profiles>-->
-<!--						<profile>h2</profile>-->
-<!--						<profile>mssql</profile>-->
-<!--					</profiles>-->
-<!--				</configuration>-->
 			</plugin>
 		</plugins>
 	</build>
