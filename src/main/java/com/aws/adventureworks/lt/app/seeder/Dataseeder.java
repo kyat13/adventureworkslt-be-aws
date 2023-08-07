@@ -24,9 +24,12 @@ public class Dataseeder {
 
     @EventListener
     public void seedQuestions(ContextRefreshedEvent event) {
-        Customer q1 = new Customer(1, "mr", "John", "M", "Travolta", "", "2005-08-01 00:00:00.000", UUID.randomUUID(), "h45h", "541T");
-        Customer q2 = new Customer(2, "mr", "Jack", "T", "Sparrow", "Jr.", "2005-08-01 00:00:00.000", UUID.randomUUID(), "h45h", "541T");
-        Customer q3 = new Customer(3, "ms", "Jane", "", "Austen", "", "2005-08-01 00:00:00.000", UUID.randomUUID(), "h45h", "541T");
+        String date = "2005-08-01 00:00:00.000";
+        String hash = "h45h";
+        String salt = "541T";
+        Customer q1 = new Customer(1, "mr", "John", "M", "Travolta", "", date, UUID.randomUUID(), hash, salt);
+        Customer q2 = new Customer(2, "mr", "Jack", "T", "Sparrow", "Jr.", date, UUID.randomUUID(), hash, salt);
+        Customer q3 = new Customer(3, "ms", "Jane", "", "Austen", "", date, UUID.randomUUID(), hash, salt);
 
         customerRepository.saveAll(List.of(q1,q2,q3));
     }
