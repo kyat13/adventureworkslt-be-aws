@@ -34,6 +34,19 @@
 				</dependency>
 			</dependencies>
 		</profile>
+		<profile>
+			<id>mssql</id>
+			<properties>
+				<spring.profiles.active>mssql</spring.profiles.active>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>com.microsoft.sqlserver</groupId>
+					<artifactId>mssql-jdbc</artifactId>
+					<scope>runtime</scope>
+				</dependency>
+			</dependencies>
+		</profile>
 	</profiles>
 
 	<dependencies>
@@ -77,11 +90,12 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<profiles>
-						<profile>h2</profile>
-					</profiles>
-				</configuration>
+<!--				<configuration>-->
+<!--					<profiles>-->
+<!--						<profile>h2</profile>-->
+<!--						<profile>mssql</profile>-->
+<!--					</profiles>-->
+<!--				</configuration>-->
 			</plugin>
 		</plugins>
 	</build>

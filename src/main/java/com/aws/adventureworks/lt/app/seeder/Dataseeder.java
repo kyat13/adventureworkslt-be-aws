@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @Configuration
 @AllArgsConstructor
-//@Profile("h2")
+@Profile("h2")
 @Slf4j
 public class Dataseeder {
 
