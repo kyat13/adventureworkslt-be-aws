@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -45,6 +46,22 @@ class CustomerServiceTest {
         assertThat(source.getContent()).isEqualTo(expectedResults);
 
     }
+    @Test
+    void getCustomer_givenCustomer_shouldReturnCustomerDto(){
+        // arrange
+        Customer customer1 = new Customer(1, "mr", "John", "M", "Travolta", "", "2005-08-01 00:00:00.000", UUID.randomUUID(), "h45h", "541T");
+        Mockito.when(customerRepository.findById(customer1.getCustomerId())).thenReturn(Optional.of(customer1));
+
+        CustomerDto expectedResult = new CustomerDto(customer1);
+
+        // act
+        CustomerDto result = customerService.getCustomer(1);
+
+        // assert
+        assertThat(result).isEqualTo(expectedResult);
+
+    }
+
 
     @Test
     void addCustomer_givenCustomerCreationDto_shouldReturnCustomerDto(){
