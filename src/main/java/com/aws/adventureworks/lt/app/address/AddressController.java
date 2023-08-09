@@ -1,8 +1,5 @@
 package com.aws.adventureworks.lt.app.address;
 
-import com.aws.adventureworks.lt.app.customer.CustomerController;
-import com.aws.adventureworks.lt.app.customer.CustomerCreationDto;
-import com.aws.adventureworks.lt.app.customer.CustomerDto;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

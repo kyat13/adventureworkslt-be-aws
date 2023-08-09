@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = AddressController.class)
-public class AddressControllerTest {
+class AddressControllerTest {
     @Autowired
     private MockMvc mockMvc;
 

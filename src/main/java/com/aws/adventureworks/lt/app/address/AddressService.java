@@ -25,18 +25,7 @@ public class AddressService {
                 addressDto.addressLine2(), addressDto.city(),
                 addressDto.stateProvince(), addressDto.countryRegion(),
                 addressDto.postalCode(), addressDto.guid(),
-                addressDto.modifiedDate()
-        );
-//        Customer newCustomer = new Customer(
-//                -1,
-//                addressDto.title(),
-//                addressDto.firstName(),
-//                addressDto.middleName(),
-//                addressDto.lastName(),
-//                addressDto.suffix(),
-//                addressDto.modifiedDate(),
-//                UUID.randomUUID(), PasswordHandler.generatePasswordHash(addressDto), "TkEK");
-
+                addressDto.modifiedDate());
         return new AddressDto(addressRepository.save(newAddress));
     }
 }
