@@ -1,9 +1,9 @@
 name: 'Build and upload to S3 Bucket'
 
-on:
-  push:
-    branches:
-      - master
+#on:
+#  push:
+#    branches:
+#      - master
 
 jobs:
   Build_and_Upload:
