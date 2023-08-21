@@ -44,33 +44,33 @@ on:
       aws-access-key:
         required: true
         description: "AWS Access Key"
-        aws-secret-key:
-          required: true
-          description: "AWS Secret Key"
-        aws-region:
-          required: true
-          description: "AWS Region"
-        template-file-path:
-          required: true
-          description: "Path to the SAM template file"
-        stack-name:
-          required: true
-          description: "The name of the CloudFormation stack to deploy"
-        #  s3-bucket-name:
-        #    required: true
-        #    description: "The name of the S3 bucket to store SAM artefacts"
-        security-group-id:
-          required: true
-          description: "The ID of the security group to use"
-        subnet-1-id:
-          required: true
-          description: "The ID of the first subnet to use"
-        subnet-2-id:
-          required: true
-          description: "The ID of the second subnet to use"
-        secret-name:
-          required: true
-          description: "The name of the secret holding the database credentials"
+      aws-secret-key:
+        required: true
+        description: "AWS Secret Key"
+      aws-region:
+        required: true
+        description: "AWS Region"
+      template-file-path:
+        required: true
+        description: "Path to the SAM template file"
+      stack-name:
+        required: true
+        description: "The name of the CloudFormation stack to deploy"
+      #  s3-bucket-name:
+      #    required: true
+      #    description: "The name of the S3 bucket to store SAM artefacts"
+      security-group-id:
+        required: true
+        description: "The ID of the security group to use"
+      subnet-1-id:
+        required: true
+        description: "The ID of the first subnet to use"
+      subnet-2-id:
+        required: true
+        description: "The ID of the second subnet to use"
+      secret-name:
+        required: true
+        description: "The name of the secret holding the database credentials"
 
 jobs:
   Deploy:
