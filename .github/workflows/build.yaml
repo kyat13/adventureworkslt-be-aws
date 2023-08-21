@@ -1,5 +1,6 @@
 name: 'Build and upload to S3 Bucket'
 
+on: [push]
 #on:
 #  push:
 #    branches:
