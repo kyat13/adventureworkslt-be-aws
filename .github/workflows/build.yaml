@@ -31,6 +31,7 @@ jobs:
       - name: 'Create package name'
         id: 'create_package'
         run: |
+          mv target/app-0.0.1-SNAPSHOT.jar target/${{ steps.generate_tag_version.outputs.tag }}.jar
           PACKAGE_NAME="target/${{ steps.generate_tag_version.outputs.tag }}.jar"
           echo "package_name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
 #          zip -r $PACKAGE_NAME .
@@ -44,6 +45,5 @@ jobs:
 
       - name: 'Upload to S3 Bucket'
         run: |
-          ls
           ls target
           aws s3 cp ${{ steps.create_package.outputs.package_name }} s3://${{ secrets.AWS_S3_BUCKET_NAME }}
