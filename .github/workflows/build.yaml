@@ -4,7 +4,7 @@ on: [push]
 #on:
 #  push:
 #    branches:
-#      - master
+#      - main
 
 jobs:
   Build_and_Upload:
@@ -37,7 +37,7 @@ jobs:
 #          zip -r $PACKAGE_NAME .
 
       - name: 'Configure AWS Credentials'
-        uses: aws-actions/configure-aws-credentials@v1-node16
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_S3_BUCKET_USER_AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_S3_BUCKET_USER_AWS_SECRET_ACCESS_KEY }}
@@ -45,3 +45,14 @@ jobs:
 
       - name: 'Upload to S3 Bucket'
         run: aws s3 cp ${{ steps.create_package.outputs.package_name }} s3://${{ secrets.AWS_S3_BUCKET_NAME }}
+
+      - uses: actions/github-script@v6
+        name: 'Create Git Tag'
+        with:
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'refs/tags/${{ steps.generate_tag_version.outputs.tag }}',
+              sha: context.sha
+            })
