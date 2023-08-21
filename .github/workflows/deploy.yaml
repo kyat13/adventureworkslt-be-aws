@@ -1,6 +1,6 @@
 name: 'Deploy to Lambda Function'
 
-description: "Build & Deploy SAM application"
+#description: "Build & Deploy SAM application"
 inputs:
   aws-access-key:
     required: true
@@ -54,9 +54,9 @@ jobs:
             const refResponse = await github.rest.git.getRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: 'tags/${{ inputs.version }}'
+              ref: 'tags/0.0.2-20230821-102220'
             });
-
+#ref: 'tags/${{ inputs.version }}'
       - name: 'Configure AWS Credentials'
         uses: aws-actions/configure-aws-credentials@v2
         with:

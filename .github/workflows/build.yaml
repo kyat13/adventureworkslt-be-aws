@@ -1,10 +1,10 @@
 name: 'Build and upload to S3 Bucket'
 
-on: [push]
-#on:
-#  push:
-#    branches:
-#      - main
+#on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   Build_and_Upload:
@@ -22,22 +22,23 @@ jobs:
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots package shade:shade -Ph2
       - name: 'Generate Tag Version'
+        uses: entimaniac/read-pom-version-action@1.0.0
         id: generate_tag_version
-        run: |
-          TAG=0.0.2-$(date +%Y%m%d)-$(date +%H%M%S)
-          echo "tag=$TAG" >> $GITHUB_OUTPUT
-          echo "Tag Version: $TAG" >> $GITHUB_STEP_SUMMARY
+#        run: |
+#          TAG=0.0.2-$(date +%Y%m%d)-$(date +%H%M%S)
+#          echo "tag=$TAG" >> $GITHUB_OUTPUT
+#          echo "Tag Version: $TAG" >> $GITHUB_STEP_SUMMARY
 
       - name: 'Create package name'
         id: 'create_package'
         run: |
-          mv target/app-0.0.2-SNAPSHOT.jar target/${{ steps.generate_tag_version.outputs.tag }}.jar
-          PACKAGE_NAME="target/${{ steps.generate_tag_version.outputs.tag }}.jar"
+          mv target/app-0.0.2-SNAPSHOT.jar target/${{ steps.generate_tag_version.outputs.version }}.jar
+          PACKAGE_NAME="target/${{ steps.generate_tag_version.outputs.version }}.jar"
           echo "package_name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
 #          zip -r $PACKAGE_NAME .
 
       - name: 'Configure AWS Credentials'
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v1-node16
         with:
           aws-access-key-id: ${{ secrets.AWS_S3_BUCKET_USER_AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_S3_BUCKET_USER_AWS_SECRET_ACCESS_KEY }}
@@ -53,6 +54,6 @@ jobs:
             github.rest.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: 'refs/tags/${{ steps.generate_tag_version.outputs.tag }}',
+              ref: 'refs/tags/${{ steps.generate_tag_version.outputs.version }}',
               sha: context.sha
             })
