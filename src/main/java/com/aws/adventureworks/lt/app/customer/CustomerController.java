@@ -24,6 +24,11 @@ public class CustomerController {
         return result;
     }
 
+    @GetMapping("/api/customer/{id}")
+    public CustomerDto addNewCustomer(@PathVariable int id){
+        return customerService.getCustomer(id);
+    }
+
     @PostMapping("/api/customer")
     public CustomerDto addNewCustomer(@RequestBody CustomerCreationDto newCustomer){
         return customerService.addCustomer(newCustomer);

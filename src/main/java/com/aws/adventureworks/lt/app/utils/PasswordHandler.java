@@ -13,6 +13,6 @@ public class PasswordHandler {
         int strength = 10; // work factor of bcrypt
         BCryptPasswordEncoder bCryptPasswordEncoder =
                 new BCryptPasswordEncoder(strength, new SecureRandom());
-        return bCryptPasswordEncoder.encode(customerCreationDto.getPassword());
+        return bCryptPasswordEncoder.encode(customerCreationDto.password());
     }
 }

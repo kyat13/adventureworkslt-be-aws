@@ -1,6 +1,7 @@
 package com.aws.adventureworks.lt.app.customer;
 
 import com.aws.adventureworks.lt.app.utils.PasswordHandler;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,15 +18,20 @@ public class CustomerService {
         return customerRepository.findAll(pageable).map(CustomerDto::new);
     }
 
+    public CustomerDto getCustomer(int id) {
+        return new CustomerDto(customerRepository.findById(id).orElseThrow(EntityNotFoundException::new));
+    }
+
+
     public CustomerDto addCustomer(CustomerCreationDto customerDto) {
         Customer newCustomer = new Customer(
                 -1,
-                customerDto.getTitle(),
-                customerDto.getFirstName(),
-                customerDto.getMiddleName(),
-                customerDto.getLastName(),
-                customerDto.getSuffix(),
-                customerDto.getModifiedDate(),
+                customerDto.title(),
+                customerDto.firstName(),
+                customerDto.middleName(),
+                customerDto.lastName(),
+                customerDto.suffix(),
+                customerDto.modifiedDate(),
                 UUID.randomUUID(), PasswordHandler.generatePasswordHash(customerDto), "TkEK");
 
         return new CustomerDto(customerRepository.save(newCustomer));

@@ -1,8 +1,8 @@
-package com.aws.adventureworks.lt.app.customer;
+package com.aws.adventureworks.lt.app.address;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, Integer> {
+public interface AddressRepository extends JpaRepository<Address, Integer> {
 }
